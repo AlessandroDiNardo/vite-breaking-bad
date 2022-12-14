@@ -1,13 +1,27 @@
 <script>
 export default {
-    name: "AppHeader"
+    name: "AppHeader",
+    props: ["msg"]
 }
 </script>
 
 <template>
-
+    <section class="container">
+        <h1>
+            {{ msg }}
+        </h1>
+    </section>
 </template>
+
 <style lang="scss" scoped>
-@use './styles/variables.scss' as *;
-@use './styles/general.scss' as *;
+@use '../style/partials/variables.scss' as *;
+@use '../style/general.scss' as *;
+
+.container {
+
+    h1 {
+        text-align: center;
+    }
+
+}
 </style>

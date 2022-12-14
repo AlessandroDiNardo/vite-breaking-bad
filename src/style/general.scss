@@ -1,5 +1,33 @@
+@use './partials/variables.scss' as*;
+
+// font esterno da fontsource
+@import 'node_modules/@fontsource/montserrat/index.css';
+@import 'node_modules/@fontsource/montserrat/700.css';
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    font-weight: $main-font;
+    color: $text;
+    background-color: $bg;
+}
+
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: black;
+    font-weight: 500;
 }
