@@ -1,19 +1,40 @@
 <script>
+import axios from 'axios'
 import AppHeader from './components/AppHeader.vue';
-import AppMain from './components/AppMain.vue';
+import AppCharacterList from './components/AppCharacterList.vue';
+import AppSingleCharacter from './components/AppSingleCharacter.vue';
+
 import { store } from './store.js';
 
 export default {
   name: "App",
   components: {
     AppHeader,
-    AppMain
+    AppCharacterList,
+    AppSingleCharacter,
   },
   data() {
     return {
       store,
     }
   },
+  methods: {
+    getCharactersList() {
+      axios
+        .get(store.apiURL)
+        .then(res => {
+          store.characterList = res.data.results;
+        })
+        .catch(err => {
+          console.lod("ERRORI", err);
+        }
+
+        );
+    }
+  },
+  mounted() {
+    this.getCharactersList();
+  }
 }
 </script>
 
@@ -22,7 +43,7 @@ export default {
     <AppHeader :msg="store.title" />
   </header>
   <main>
-    <AppMain />
+    <AppCharacterList />
   </main>
 </template>
 
