@@ -2,8 +2,7 @@
 import axios from 'axios'
 import AppHeader from './components/AppHeader.vue';
 import AppCharacterList from './components/AppCharacterList.vue';
-import AppSingleCharacter from './components/AppSingleCharacter.vue';
-
+import AppSearch from './components/AppSearch.vue';
 import { store } from './store.js';
 
 export default {
@@ -11,7 +10,7 @@ export default {
   components: {
     AppHeader,
     AppCharacterList,
-    AppSingleCharacter,
+    AppSearch
   },
   data() {
     return {
@@ -20,13 +19,20 @@ export default {
   },
   methods: {
     getCharactersList() {
+
+      let myURL = store.apiURL;
+
+      if (store.searchStatus !== "") {
+        myURL += `?${store.apiStatus}=${store.searchStatus}`;
+      }
+
       axios
-        .get(store.apiURL)
+        .get(myURL)
         .then(res => {
           store.characterList = res.data.results;
         })
         .catch(err => {
-          console.lod("ERRORI", err);
+          console.log("ERRORI", err);
         }
 
         );
@@ -43,6 +49,7 @@ export default {
     <AppHeader :msg="store.title" />
   </header>
   <main>
+    <AppSearch @search="getCharactersList()" />
     <AppCharacterList />
   </main>
 </template>
